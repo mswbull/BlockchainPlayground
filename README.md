@@ -1,56 +1,83 @@
-# Naivechain - a blockchain implementation in 200 lines of code
+# Blockchain - Playground
 
-### Motivation
-All the current implementations of blockchains are tightly coupled with the larger context and problems they (e.g. Bitcoin or Ethereum) are trying to solve. This makes understanding blockchains a necessarily harder task, than it must be. Especially source-code-wisely. This project is an attempt to provide as concise and simple implementation of a blockchain as possible.
+### Introduction
+This project (forked from [naivechain](https://github.com/lhartikk/naivechain)) is designed to provide a simple playground to help learn the basic concept of blockchain.
 
- 
-### What is blockchain
-[From Wikipedia](https://en.wikipedia.org/wiki/Blockchain_(database)) : Blockchain is a distributed database that maintains a continuously-growing list of records called blocks secured from tampering and revision.
+### What is Blockchain
+The blockchain is an open, decentralized ledger, which is best described as a continuously growing list of records (called blocks) that are linked and secured using cryptography. More information can be found at  [LifeinTECH](http://lifeintech.com/2014/01/27/Blockchain/).
 
-### Key concepts of Naivechain
-Check also [this blog post](https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54#.dttbm9afr5) for a more detailed overview of the key concepts
-* HTTP interface to control the node
-* Use Websockets to communicate with other nodes (P2P)
-* Super simple "protocols" in P2P communication
-* Data is not persisted in nodes
-* No proof-of-work or proof-of-stake: a block can be added to the blockchain without competition
+### Key Features
+The following features are included:
 
+* Written in JavaScript, with a focus on readability.
+* HTTP interface to control each node.
+* Websockets to communicate between nodes (Peer-to-Peer).
+* No persisted storage, instead an in-memory Javascript array is used.
+* No consensus algorithm (yet), meaning a block can be added without competition.
 
-![alt tag](naivechain_blockchain.png)
+More details can be found at [LifeinTECH](http://www.lifeintech.com).
 
-![alt tag](naivechain_components.png)
-
-### Quick start
-(set up two connected nodes and mine 1 block)
+### Getting Started ([Docker](http://www.docker.com))
+##### Create and Start Three Nodes
 ```
-npm install
-HTTP_PORT=3001 P2P_PORT=6001 npm start
-HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 npm start
-curl -H "Content-type:application/json" --data '{"data" : "Some data to the first block"}' http://localhost:3001/mineBlock
-```
-
-### Quick start with Docker
-(set up three connected nodes and mine a block)
-###
-```sh
 docker-compose up
-curl -H "Content-type:application/json" --data '{"data" : "Some data to the first block"}' http://localhost:3001/mineBlock
+```
+##### Start Node
+```
+docker container start -i naivechain_node1_1
+docker container start -i naivechain_node2_1
+docker container start -i naivechain_node3_1
+```
+##### Stop Node
+```
+docker container stop naivechain_node1_1
+docker container stop naivechain_node2_1
+docker container stop naivechain_node3_1
 ```
 
-### HTTP API
-##### Get blockchain
+### Node Information
+##### Ports for HTTP and Websockets
+```
+node1 = HTTP:3001 / WS:6001 (172.18.0.2)
+node2 = HTTP:3002 / WS:6002 (172.18.0.3)
+node3 = HTTP:3003 / WS:6003 (172.18.0.4)
+```
+
+### API
+##### Create Block
+```
+curl -H "Content-type:application/json" --data '{"data" : "Node 01 - Block 01"}' http://localhost:3001/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 01 - Block 02"}' http://localhost:3001/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 01 - Block 03"}' http://localhost:3001/mineBlock
+
+curl -H "Content-type:application/json" --data '{"data" : "Node 02 - Block 01"}' http://localhost:3002/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 02 - Block 02"}' http://localhost:3002/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 02 - Block 03"}' http://localhost:3002/mineBlock
+
+curl -H "Content-type:application/json" --data '{"data" : "Node 03 - Block 01"}' http://localhost:3003/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 03 - Block 02"}' http://localhost:3003/mineBlock
+curl -H "Content-type:application/json" --data '{"data" : "Node 03 - Block 03"}' http://localhost:3003/mineBlock
+```
+##### Get Blockchain
 ```
 curl http://localhost:3001/blocks
+curl http://localhost:3002/blocks
+curl http://localhost:3003/blocks
 ```
-##### Create block
+##### Add Peer
 ```
-curl -H "Content-type:application/json" --data '{"data" : "Some data to the first block"}' http://localhost:3001/mineBlock
-``` 
-##### Add peer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6002"}' http://localhost:3001/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6003"}' http://localhost:3001/addPeer
+
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6001"}' http://localhost:3002/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6003"}' http://localhost:3002/addPeer
+
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6001"}' http://localhost:3003/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6002"}' http://localhost:3003/addPeer
 ```
-curl -H "Content-type:application/json" --data '{"peer" : "ws://localhost:6001"}' http://localhost:3001/addPeer
-```
-#### Query connected peers
+##### Query Peers
 ```
 curl http://localhost:3001/peers
+curl http://localhost:3002/peers
+curl http://localhost:3003/peers
 ```
