@@ -24,15 +24,15 @@ docker-compose up
 ```
 ##### Start Node
 ```
-docker container start -i naivechain_node1_1
-docker container start -i naivechain_node2_1
-docker container start -i naivechain_node3_1
+docker container start -i blockchainplayground_node1_1
+docker container start -i blockchainplayground_node2_1
+docker container start -i blockchainplayground_node3_1
 ```
 ##### Stop Node
 ```
-docker container stop naivechain_node1_1
-docker container stop naivechain_node2_1
-docker container stop naivechain_node3_1
+docker container stop blockchainplayground_node1_1
+docker container stop blockchainplayground_node2_1
+docker container stop blockchainplayground_node3_1
 ```
 
 
