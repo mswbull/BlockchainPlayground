@@ -35,6 +35,7 @@ docker container stop naivechain_node2_1
 docker container stop naivechain_node3_1
 ```
 
+
 ### Node Information
 ##### Ports for HTTP and Websockets
 ```
@@ -42,6 +43,7 @@ node1 = HTTP:3001 / WS:6001 (172.18.0.2)
 node2 = HTTP:3002 / WS:6002 (172.18.0.3)
 node3 = HTTP:3003 / WS:6003 (172.18.0.4)
 ```
+
 
 ### API
 ##### Create Block
