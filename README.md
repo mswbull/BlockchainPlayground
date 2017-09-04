@@ -11,11 +11,11 @@ The following features are included:
 
 * Written in JavaScript, with a focus on readability.
 * HTTP interface to control each node.
-* Websockets to communicate between nodes (Peer-to-Peer).
+* WebSockets to communicate between nodes (Peer-to-Peer).
 * No persisted storage, instead an in-memory Javascript array is used.
 * No consensus algorithm (yet), meaning a block can be added without competition.
 
-More details can be found at [LifeinTECH](http://www.lifeintech.com).
+More details can be found at [LifeinTECH](http://www.lifeintech.com/2017/07/16/Blockchain-Playground/).
 
 ### Getting Started ([Docker](http://www.docker.com))
 ##### Create and Start Three Nodes
@@ -40,8 +40,8 @@ docker container stop blockchainplayground_node3_1
 ##### Ports for HTTP and Websockets
 ```
 node1 = http://localhost:3001 / ws://node1:6001 (172.18.0.2)
-node2 = http://localhost:3002 / ws://node2:6001 (172.18.0.3)
-node3 = http://localhost:3003 / ws://node3:6001 (172.18.0.4)
+node2 = http://localhost:3002 / ws://node2:6002 (172.18.0.3)
+node3 = http://localhost:3003 / ws://node3:6003 (172.18.0.4)
 ```
 
 
@@ -68,14 +68,14 @@ curl http://localhost:3003/blocks
 ```
 ##### Add Peer
 ```
-curl -H "Content-type:application/json" --data '{"peer" : "ws://node2:6001"}' http://localhost:3001/addPeer
-curl -H "Content-type:application/json" --data '{"peer" : "ws://node3:6001"}' http://localhost:3001/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://node2:6002"}' http://localhost:3001/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://node3:6003"}' http://localhost:3001/addPeer
 
 curl -H "Content-type:application/json" --data '{"peer" : "ws://node1:6001"}' http://localhost:3002/addPeer
-curl -H "Content-type:application/json" --data '{"peer" : "ws://node3:6001"}' http://localhost:3002/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://node3:6003"}' http://localhost:3002/addPeer
 
 curl -H "Content-type:application/json" --data '{"peer" : "ws://node1:6001"}' http://localhost:3003/addPeer
-curl -H "Content-type:application/json" --data '{"peer" : "ws://node2:6001"}' http://localhost:3003/addPeer
+curl -H "Content-type:application/json" --data '{"peer" : "ws://node2:6002"}' http://localhost:3003/addPeer
 ```
 ##### Query Peers
 ```
