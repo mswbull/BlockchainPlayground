@@ -1,17 +1,29 @@
 {
-  "name": "naivechain",
-  "version": "1.0.0",
-  "description": "",
+  "name": "blockchainplayground",
+  "version": "1.0.1",
+  "description": "A Blockchain Playground",
   "scripts": {
     "start": "node main.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "colors": "^1.1.2",
     "crypto-js": "^3.1.6",
     "express": "~4.11.1",
     "ws": "^1.1.0"
   },
   "engines": {
     "node": ">=4.3.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mswbull/BlockchainPlayground"
+  },
+  "keywords": [
+    "blockchain",
+    "javascript",
+    "docker"
+  ],
+  "author": "Matthew Bull",
+  "license": "Apache Version 2.0"
 }
