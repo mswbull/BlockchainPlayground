@@ -1,10 +1,10 @@
-# Blockchain - Playground
+# Blockchain Playground
 
 ### Introduction
-This project (forked from [naivechain](https://github.com/lhartikk/naivechain)) is designed to provide a simple playground to help learn the basic concept of blockchain.
+This project (forked from [naivechain](https://github.com/lhartikk/naivechain)) is designed to provide a simple playground to help learn the basic concepts of blockchain.
 
 ### What is Blockchain
-The blockchain is an open, decentralized ledger, which is best described as a continuously growing list of records (called blocks) that are linked and secured using cryptography. More information can be found at  [LifeinTECH](http://lifeintech.com/2014/01/27/Blockchain/).
+The blockchain is an open, decentralised ledger, which is best described as a continuously growing list of records (called blocks) that are linked and secured using cryptography. More information can be found at  [LifeinTECH](http://lifeintech.com/2014/01/27/Blockchain/).
 
 ### Key Features
 The following features are included:
